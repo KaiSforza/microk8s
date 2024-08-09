@@ -570,12 +570,7 @@ def get_valid_connection_parts(connection):
             "Expected format: <master_IP>:<master_PORT>/<token>[/<fingerprint>]"
         )
 
-    master_ep = connection_parts[0].split(":")
-    if len(master_ep) != 2:
-        raise InvalidConnectionError(
-            "Expected format: <master_IP>:<master_PORT>/<token>[/<fingerprint>]"
-        )
-
+    master_ep = connection_parts[0].rsplit(":", 1)
     try:
         ipaddress.ip_address(master_ep[0])
     except ValueError:
